@@ -1,0 +1,1 @@
+4 ethernet ipv4 4 ethernet ipv6 --write=output.pcap --shuffle=no

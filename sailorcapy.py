@@ -151,6 +151,10 @@ def parse_packets(packet_info):
         packet = Ether() / IPv6() / IP()
     elif packet_type == 'ipv6 ipv6':
         packet = Ether() / IPv6() / IPv6()
+    elif packet_type == 'vlan ipv4':
+        packet = Ether() / Dot1Q() / IP()
+    elif packet_type == 'vlan ipv6':
+        packet = Ether() / Dot1Q() / IPv6()
     else:
         print("Invalid packet type.")
         return None
@@ -171,7 +175,9 @@ def packet_processor():
 # Parse command-line syntax
 def parse_syntax(arguments):
     i = 0
-    
+    if len(arguments) == 1:
+        with open(arguments[0], 'r') as file:
+            arguments = file.read().splitlines()[0].split(" ")
     while i < len(arguments):
         argument = arguments[i]
         

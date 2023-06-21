@@ -27,9 +27,9 @@ python sailorcapy.py [arguments]
 
 ## Examples
 
- 1. Generate 20 IPv4 packets followed by 30 IPv6 packets, write to "output.pcap" and shuffle the packets:
+ 1. Generate 20 VLAN IPv4 packets followed by 30 IPv6 packets, write to "output.pcap" and shuffle the packets:
     ```
-    python sailorcapy.py 20 ipv4 30 ipv6 --write=output.pcap --shuffle=yes
+    python sailorcapy.py 20 vlan ipv4 30 ipv6 --write=output.pcap --shuffle=yes
     ```
 
  2. Generate 4 IPv4 packets followed by 4 IPv6 packets, write to "output.pcap" and do not shuffle the packets:
@@ -86,6 +86,11 @@ python sailorcapy.py [arguments]
      ```
      python sailorcapy.py 2 tcp [sport=8888] 2 udp [dport=1234] 2 ipv4 [ttl=128] --write=output.pcap --shuffle=no
      ```
+
+  13. Generate packets from the input configuration file input.txt:
+  ```
+  python sailorcapy.py input.txt
+  ```
 
 Feel free to adjust the quantities, packet types, and modify the field values in the square brackets to create various packet generation scenarios.
 

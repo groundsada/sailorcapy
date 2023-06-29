@@ -29,6 +29,7 @@ def parse_arguments(*args):
 packets = []
 filename = "output.pcap"
 shuffle_option = "no"
+packet_size = None
 
 # Parse command-line flags
 def parse_flag(flag, value):
@@ -41,6 +42,8 @@ def parse_flag(flag, value):
         shuffle_option = value or 'no'
     elif flag == "write":
         filename = value or 'output.pcap'
+    elif flag == "size":
+        packet_size = value or None
     else:
         print("Unrecognized flag. Use --help.")
 
@@ -163,6 +166,13 @@ def parse_packets(packet_info):
         packet.src = "00:11:22:33:44:55"
         packet.dst = "66:77:88:99:AA:BB"
         packet = parse_args(args, packet)
+        if packet_size is not None:
+            current_size = len(packet)
+            if current_size < packet_size:
+                padding = b'\x00' * (packet_size - current_size)
+                packet = packet / Raw(load=padding)
+            elif current_size > packet_size:
+                packet[Raw].load = packet[Raw].load[:packet_size - current_size]
         packets.append(packet)
 
 # Process packets and write them to a pcap file

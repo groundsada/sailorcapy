@@ -35,7 +35,8 @@ packet_size = None
 def parse_flag(flag, value):
     global filename
     global shuffle_option
-    
+    global packet_size
+
     if flag == "help" or flag == "h":
         print(messages.DEBUGMSG)
     elif flag == "shuffle":
@@ -43,7 +44,8 @@ def parse_flag(flag, value):
     elif flag == "write":
         filename = value or 'output.pcap'
     elif flag == "size":
-        packet_size = value or None
+        print("changed size")
+        packet_size = value or "None"
     else:
         print("Unrecognized flag. Use --help.")
 
@@ -166,13 +168,19 @@ def parse_packets(packet_info):
         packet.src = "00:11:22:33:44:55"
         packet.dst = "66:77:88:99:AA:BB"
         packet = parse_args(args, packet)
+        print("before if packet size ", packet_size)
         if packet_size is not None:
+            print("reached size")
             current_size = len(packet)
+            print("current size is ", current_size)
+            print("packet_size is ", packet_size)
             if current_size < packet_size:
                 padding = b'\x00' * (packet_size - current_size)
                 packet = packet / Raw(load=padding)
+                print("new first packet size ", len(packet))
             elif current_size > packet_size:
                 packet[Raw].load = packet[Raw].load[:packet_size - current_size]
+                print("new second packet_size ", len(packet))
         packets.append(packet)
 
 # Process packets and write them to a pcap file

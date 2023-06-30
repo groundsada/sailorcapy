@@ -10,11 +10,13 @@ Usage: sailorcopy [ -<flag> [<val>] | --<name>[{=| }<val>] ]... <packet_info>...
 
 --output=str Set output filename (default: "output.pcap")
 --shuffle=str Shuffle packets before writing ("yes" or "no", default: "no")
+--size=int Set the frame size in bytes
+--random=str Populate all packet fields with random data
 -h, --help Display usage information and exit
 
 Options are specified by doubled hyphens.
 
 Sailorcapy is a tool for processing network packets and generating pcap files.
 
-Please send bug reports to: your-email@example.com
+Please send bug reports to: mhd.firas.sada@gmail.com
 '''

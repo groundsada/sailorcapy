@@ -1,4 +1,5 @@
 # SailorCapy
+## v0.11a
 
 SailorCapy is a Python program for generating network packets using the Scapy library. It allows you to customize and create packets based on different protocols and parameters. This README provides example use cases to demonstrate how to use SailorCapy effectively.
 
@@ -94,6 +95,38 @@ python sailorcapy.py [arguments]
 
 Feel free to adjust the quantities, packet types, and modify the field values in the square brackets to create various packet generation scenarios.
 
+---
+
+To prioritize examples using --size, here are modified versions of examples 1 and 2:
+
+   14. Generate 20 VLAN IPv4 packets followed by 30 IPv6 packets, write to "output.pcap" and shuffle the packets:
+   ```
+   python sailorcapy.py --size=512 vlan ipv4 ipv6 --write=output.pcap --shuffle=yes
+   ```
+   15. Generate 4 IPv4 packets followed by 4 IPv6 packets, write to "output.pcap" and do not shuffle the packets:
+   ```
+   python sailorcapy.py --size=1024 ipv4 ipv6 --write=output.pcap --shuffle=no
+   ```
+---
+
+The default behavior is to populate the fields with random data, to manually modify behavior:
+
+   16. Generate 20 VLAN IPv4 packets followed by 30 IPv6 packets, write to "output.pcap" and randomize the data in the packets:
+   ```
+   python sailorcapy.py --size=512 vlan ipv4 ipv6 --write=output.pcap --random=yes
+   ```
+   17. Generate 4 IPv4 packets followed by 4 IPv6 packets, write to "output.pcap" and do not randomize:
+   ```
+   python sailorcapy.py --size=1024 ipv4 ipv6 --write=output.pcap --random=no
+   ```
+---
+
+Experimental: to generate SRv6 packets:
+
+   18. Generate 20 SRv6 packets:
+   ```
+   python sailorcapy.py --size=512 srv6 --random=yes
+   ```
 ---
 
 Make sure to replace `[arguments]` in the usage section with the desired arguments based on the provided examples.
